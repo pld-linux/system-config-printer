@@ -13,6 +13,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
+Requires:	python-rhpl
 %pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,7 +47,8 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name}
 
-%py_postclean %{_datadir}/system-config-printer
+%py_comp $RPM_BUILD_ROOT%{_datadir}/system-config-printer
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/system-config-printer
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
 %attr(755,root,root) %{_sbindir}/system-config-printer
 %{_sysconfdir}/xdg/autostart/*.desktop
-%{_datadir}/system-config-printer
+%dir %{_datadir}/system-config-printer
+%{_datadir}/system-config-printer/*.glade
+%{_datadir}/system-config-printer/*.png
+%attr(755,root,root) %{_datadir}/system-config-printer/*.py*
 %{_mandir}/man*/*
 %{_desktopdir}/*.desktop
