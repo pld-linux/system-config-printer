@@ -1,5 +1,5 @@
-Summary:	A graphical interface for modifying system date and time
-Summary(pl.UTF-8):	Graficzny interfejs do zmiany daty i czasu systemowego
+Summary:	A graphical interface for configuring printers
+Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	0.7.65
 Release:	0.1
@@ -18,15 +18,10 @@ Requires:	python-rhpl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-system-config-date is a graphical interface for changing the system
-date and time, configuring the system time zone, and setting up the
-NTP daemon to synchronize the time of the system with a NTP time
-server.
-
-%description -l pl.UTF-8
-system-config-date to graficzny interfejs do zmiany daty i czasu
-systemowego, konfiguracji strefy czasowej i ustawiania demona NTP do
-synchronizacji czasu systemowego z serwerem czasu NTP.
+The purpose of the tool is to configure a CUPS server (often the
+local machine) using the CUPS API. The tool is written in Python,
+using pygtk for the graphical parts and with some Python bindings
+(pycups) for the CUPS API.
 
 %prep
 %setup -q
