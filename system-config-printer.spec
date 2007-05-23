@@ -14,6 +14,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
 Requires:	python-rhpl
+Requires:	python-pycups
 %pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
