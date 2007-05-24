@@ -2,17 +2,20 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	0.7.65
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		X11/Application
 Source0:	http://cyberelk.net/tim/data/system-config-printer/%{name}-%{version}.tar.bz2
 # Source0-md5:	c076dee6f8ecc0819a9d397b8f204e74
+Patch0:		%{name}-desktop.patch
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
+Requires:	eggcups
+Requires:	gksu
 Requires:	python-rhpl
 Requires:	python-pycups
 %pyrequires_eq	python-libs
@@ -26,6 +29,7 @@ using pygtk for the graphical parts and with some Python bindings
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__aclocal}
