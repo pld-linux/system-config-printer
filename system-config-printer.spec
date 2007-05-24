@@ -18,6 +18,7 @@ Requires:	eggcups
 Requires:	gksu
 Requires:	python-rhpl
 Requires:	python-pycups >= 1.9.22
+Requires:	python-pynotify
 %pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
