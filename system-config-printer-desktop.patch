@@ -1,0 +1,11 @@
+--- system-config-printer-0.7.65/system-config-printer.desktop.in~	2007-03-30 17:39:16.000000000 +0200
++++ system-config-printer-0.7.65/system-config-printer.desktop.in	2007-05-24 13:28:54.888392947 +0200
+@@ -2,7 +2,7 @@
+ Encoding=UTF-8
+ _Name=Printing
+ _Comment=Configure printers
+-Exec=/usr/bin/system-config-printer
++Exec=gksu /usr/sbin/system-config-printer
+ Terminal=false
+ Type=Application
+ Icon=printer.png
