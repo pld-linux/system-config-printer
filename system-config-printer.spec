@@ -17,7 +17,7 @@ BuildRequires:	python-devel
 Requires:	eggcups
 Requires:	gksu
 Requires:	python-rhpl
-Requires:	python-pycups
+Requires:	python-pycups >= 1.9.22
 %pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
