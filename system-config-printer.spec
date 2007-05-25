@@ -18,9 +18,9 @@ BuildRequires:	python-devel
 BuildRequires:	xmlto
 Requires:	eggcups
 Requires:	gksu
-Requires:	python-rhpl
 Requires:	python-pycups >= 1.9.22
 Requires:	python-pynotify
+Requires:	python-rhpl
 %pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -29,6 +29,12 @@ The purpose of the tool is to configure a CUPS server (often the
 local machine) using the CUPS API. The tool is written in Python,
 using pygtk for the graphical parts and with some Python bindings
 (pycups) for the CUPS API.
+
+%description -l pl.UTF-8
+To narzędzie służy do konfigurowania serwera CUPS (zwykle na
+maszynie lokalnej) przy użyciu API CUPS-a. Narzędzie jest napisane w
+Pythonie z użyciem pygtk do części graficznych i dowiązań Pythona
+(pycups) do API CUPS-a.
 
 %prep
 %setup -q
