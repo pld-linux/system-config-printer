@@ -14,6 +14,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
+BuildRequires:	xmlto
 Requires:	eggcups
 Requires:	gksu
 Requires:	python-rhpl
