@@ -11,6 +11,7 @@ Patch0:		%{name}-desktop.patch
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	desktop-file-utils
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
