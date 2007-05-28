@@ -18,6 +18,7 @@ BuildRequires:	python-devel
 BuildRequires:	xmlto
 Requires:	eggcups
 Requires:	gksu
+Requires:	python-PyXML
 Requires:	python-pycups >= 1.9.22
 Requires:	python-pynotify
 Requires:	python-rhpl
