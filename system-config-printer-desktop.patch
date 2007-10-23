@@ -1,6 +1,6 @@
 --- system-config-printer-0.7.65/system-config-printer.desktop.in~	2007-03-30 17:39:16.000000000 +0200
 +++ system-config-printer-0.7.65/system-config-printer.desktop.in	2007-05-24 13:28:54.888392947 +0200
-@@ -2,7 +2,7 @@
+@@ -2,8 +2,8 @@
  Encoding=UTF-8
  _Name=Printing
  _Comment=Configure printers
@@ -8,4 +8,14 @@
 +Exec=gksu /usr/sbin/system-config-printer
  Terminal=false
  Type=Application
- Icon=printer.png
+-Icon=printer.png
++Icon=printer
+ StartupNotify=true
+--- system-config-printer-0.7.76/my-default-printer.desktop.in~	2007-10-15 12:31:15.000000000 +0200
++++ system-config-printer-0.7.76/my-default-printer.desktop.in	2007-10-24 00:03:59.619857868 +0200
+@@ -5,4 +5,4 @@
+ Exec=/usr/bin/my-default-printer
+ Terminal=false
+ Type=Application
+-Icon=printer.png
++Icon=printer
