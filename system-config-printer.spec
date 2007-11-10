@@ -2,7 +2,7 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	0.7.76
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/%{name}-%{version}.tar.bz2
@@ -23,6 +23,8 @@ Requires:	python-pycups >= 1.9.28
 Requires:	python-pynotify
 Requires:	python-rhpl
 %pyrequires_eq	python-libs
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,16 +43,20 @@ CUPS-a.
 %setup -q
 %patch0 -p1
 
+sed -i -e s#sr\@Latn#sr\@latin# configure.in
+mv po/sr\@{Latn,latin}.po
+
 %build
 %{__intltoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%{configure}
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
