@@ -1,13 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	0.7.78
+Version:	0.7.82
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/%{name}-%{version}.tar.bz2
-# Source0-md5:	300a038e623c4192a68b4a43cf9b5dd8
-Patch0:		%{name}-desktop.patch
+# Source0-md5:	a85efc175c58506239f3613baf992fca
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -16,7 +15,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
 BuildRequires:	xmlto
-Requires:	eggcups
+Obsoletes:	eggcups
 Requires:	gksu
 Requires:	python-PyXML
 Requires:	python-pycups >= 1.9.28
@@ -41,7 +40,6 @@ CUPS-a.
 
 %prep
 %setup -q
-%patch0 -p1
 
 sed -i -e s#sr\@Latn#sr\@latin# configure.in
 mv po/sr\@{Latn,latin}.po
@@ -81,5 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/system-config-printer
 %{_datadir}/system-config-printer/*.glade
 %attr(755,root,root) %{_datadir}/system-config-printer/*.py*
+%dir %{_datadir}/system-config-printer/troubleshoot
+%attr(755,root,root) %{_datadir}/system-config-printer/troubleshoot/*.py*
 %{_mandir}/man*/*
 %{_desktopdir}/*.desktop
