@@ -16,13 +16,13 @@ BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
 BuildRequires:	xmlto
-Obsoletes:	eggcups
 Requires:	gksu
 Requires:	python-PyXML
 Requires:	python-pycups >= 1.9.28
 Requires:	python-pynotify
 Requires:	python-rhpl
 %pyrequires_eq	python-libs
+Obsoletes:	eggcups
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
