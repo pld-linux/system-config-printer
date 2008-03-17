@@ -2,11 +2,12 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	0.7.82
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/%{name}-%{version}.tar.bz2
 # Source0-md5:	a85efc175c58506239f3613baf992fca
+Patch0:		%{name}-gksu.patch
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -40,6 +41,7 @@ CUPS-a.
 
 %prep
 %setup -q
+%patch0 -p1
 
 sed -i -e s#sr\@Latn#sr\@latin# configure.in
 mv po/sr\@{Latn,latin}.po
