@@ -1,11 +1,13 @@
---- system-config-printer-0.7.82/system-config-printer.desktop.in~	2008-02-19 18:20:29.000000000 +0100
-+++ system-config-printer-0.7.82/system-config-printer.desktop.in	2008-03-17 12:37:48.575846430 +0100
+diff -ur system-config-printer-0.9.93/system-config-printer.desktop.in system-config-printer-0.9.93.new/system-config-printer.desktop.in
+--- system-config-printer-0.9.93/system-config-printer.desktop.in	2008-05-23 13:57:31.000000000 +0200
++++ system-config-printer-0.9.93.new/system-config-printer.desktop.in	2008-10-18 20:12:11.398484163 +0200
 @@ -2,7 +2,7 @@
  Encoding=UTF-8
  _Name=Printing
  _Comment=Configure printers
--Exec=/usr/bin/system-config-printer
-+Exec=gksu /usr/sbin/system-config-printer
+-Exec=system-config-printer
++Exec=gksu /usr/bin/system-config-printer
  Terminal=false
  Type=Application
  Icon=printer
+Tylko w system-config-printer-0.9.93.new/: system-config-printer.desktop.in~
