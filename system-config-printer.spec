@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	0.7.82
-Release:	2
+Version:	0.9.93
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/%{name}-%{version}.tar.bz2
-# Source0-md5:	a85efc175c58506239f3613baf992fca
+# Source0-md5:	b97deae648bc1c5825874d250a9c140c
 Patch0:		%{name}-gksu.patch
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
@@ -44,7 +44,6 @@ CUPS-a.
 %patch0 -p1
 
 sed -i -e s#sr\@Latn#sr\@latin# configure.in
-mv po/sr\@{Latn,latin}.po
 
 %build
 %{__intltoolize}
@@ -74,10 +73,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/my-default-printer
+%attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
-%attr(755,root,root) %{_sbindir}/system-config-printer
 %{_sysconfdir}/xdg/autostart/*.desktop
-%{_sysconfdir}/dbus-1/system.d/newprinternotification.conf
+/etc/dbus-1/system.d/newprinternotification.conf
 %dir %{_datadir}/system-config-printer
 %{_datadir}/system-config-printer/*.glade
 %attr(755,root,root) %{_datadir}/system-config-printer/*.py*
@@ -85,3 +84,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/system-config-printer/troubleshoot/*.py*
 %{_mandir}/man*/*
 %{_desktopdir}/*.desktop
+%dir %{_datadir}/system-config-printer/icons
+%{_datadir}/system-config-printer/icons/i-network-printer.png
