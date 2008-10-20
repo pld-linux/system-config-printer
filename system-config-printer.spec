@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/system-config-printer/*.py*
 %dir %{_datadir}/system-config-printer/troubleshoot
 %attr(755,root,root) %{_datadir}/system-config-printer/troubleshoot/*.py*
-%{_mandir}/man*/*
-%{_desktopdir}/*.desktop
 %dir %{_datadir}/system-config-printer/icons
 %{_datadir}/system-config-printer/icons/i-network-printer.png
+%{_mandir}/man*/*
+%{_desktopdir}/*.desktop
