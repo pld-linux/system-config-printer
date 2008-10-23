@@ -14,11 +14,12 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
+BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	xmlto
+%pyrequires_eq	python-libs
 Requires:	python-PyXML
 Requires:	python-pycups >= 1.9.28
 Requires:	python-pynotify
-%pyrequires_eq	python-libs
 Obsoletes:	eggcups
 Obsoletes:	gnome-cups-manager < 0.34
 # sr@Latn vs. sr@latin
@@ -64,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 %py_ocomp $RPM_BUILD_ROOT%{_datadir}/system-config-printer
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
 %py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
-%py_postclean $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
+%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -88,4 +89,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 %{py_sitescriptdir}/cupshelpers-1.0-py*.egg-info
 %dir %{py_sitescriptdir}/cupshelpers
-%{py_sitescriptdir}/cupshelpers/*py[co]
+%{py_sitescriptdir}/cupshelpers/*.py[co]
