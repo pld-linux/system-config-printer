@@ -1,13 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	0.9.93
+Version:	1.0.9
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/%{name}-%{version}.tar.bz2
-# Source0-md5:	b97deae648bc1c5825874d250a9c140c
-Patch0:		%{name}-gksu.patch
+Source0:	http://cyberelk.net/tim/data/system-config-printer/1.0.x/%{name}-%{version}.tar.bz2
+# Source0-md5:	accb926526b4c56c47ba732dd1028cb4
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -16,13 +15,12 @@ BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	python-devel
 BuildRequires:	xmlto
-Requires:	gksu
 Requires:	python-PyXML
 Requires:	python-pycups >= 1.9.28
 Requires:	python-pynotify
-Requires:	python-rhpl
 %pyrequires_eq	python-libs
 Obsoletes:	eggcups
+Obsoletes:	gnome-cups-manager < 0.34
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -41,7 +39,6 @@ CUPS-a.
 
 %prep
 %setup -q
-%patch0 -p1
 
 sed -i -e s#sr\@Latn#sr\@latin# configure.in
 
@@ -65,13 +62,16 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %py_comp $RPM_BUILD_ROOT%{_datadir}/system-config-printer
 %py_ocomp $RPM_BUILD_ROOT%{_datadir}/system-config-printer
+%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
+%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
+%py_postclean $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/my-default-printer
 %attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
@@ -86,3 +86,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/system-config-printer/icons/i-network-printer.png
 %{_mandir}/man*/*
 %{_desktopdir}/*.desktop
+%{py_sitescriptdir}/cupshelpers-1.0-py*.egg-info
+%dir %{py_sitescriptdir}/cupshelpers
+%{py_sitescriptdir}/cupshelpers/*py[co]
