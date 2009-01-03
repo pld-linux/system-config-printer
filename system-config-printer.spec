@@ -79,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/autostart/*.desktop
 /etc/dbus-1/system.d/newprinternotification.conf
 %dir %{_datadir}/system-config-printer
+%dir %{_datadir}/system-config-printer/glade
 %{_datadir}/system-config-printer/glade/*.glade
 %attr(755,root,root) %{_datadir}/system-config-printer/*.py*
 %dir %{_datadir}/system-config-printer/troubleshoot
