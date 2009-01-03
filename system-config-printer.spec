@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.0.12
+Version:	1.1.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/1.0.x/%{name}-%{version}.tar.bz2
-# Source0-md5:	5ba48202a4416d55dde55b4eb0d64ec2
+Source0:	http://cyberelk.net/tim/data/system-config-printer/1.1/%{name}-%{version}.tar.bz2
+# Source0-md5:	95ad721f3d274557144ddcf5e458a9e4
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -79,7 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/autostart/*.desktop
 /etc/dbus-1/system.d/newprinternotification.conf
 %dir %{_datadir}/system-config-printer
-%{_datadir}/system-config-printer/*.glade
+%{_datadir}/system-config-printer/glade/*.glade
 %attr(755,root,root) %{_datadir}/system-config-printer/*.py*
 %dir %{_datadir}/system-config-printer/troubleshoot
 %attr(755,root,root) %{_datadir}/system-config-printer/troubleshoot/*.py*
