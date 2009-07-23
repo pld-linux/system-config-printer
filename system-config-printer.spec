@@ -2,7 +2,7 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	1.1.10
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/1.1/%{name}-%{version}.tar.bz2
@@ -20,6 +20,7 @@ BuildRequires:	xmlto
 %pyrequires_eq	python-libs
 Requires:	python-PyXML
 Requires:	python-pycups >= 1.9.28
+Requires:	python-pygtk-glade
 Requires:	python-pynotify
 Obsoletes:	eggcups
 Obsoletes:	gnome-cups-manager < 0.34
