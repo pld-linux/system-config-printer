@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.1.18
+Version:	1.2.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/1.1/%{name}-%{version}.tar.bz2
-# Source0-md5:	073788462a8122f4b3c9ad31465c61be
+Source0:	http://cyberelk.net/tim/data/system-config-printer/1.2/%{name}-%{version}.tar.bz2
+# Source0-md5:	4612335ba74f8a3ef275a42a5f269685
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -74,14 +74,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/my-default-printer
 %attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
 %{_sysconfdir}/xdg/autostart/*.desktop
 /etc/dbus-1/system.d/newprinternotification.conf
+/etc/dbus-1/system.d/printerdriversinstaller.conf
 %dir %{_datadir}/system-config-printer
-%dir %{_datadir}/system-config-printer/glade
-%{_datadir}/system-config-printer/glade/*.glade
+%dir %{_datadir}/system-config-printer/ui
+%{_datadir}/system-config-printer/ui/*.glade
 %attr(755,root,root) %{_datadir}/system-config-printer/*.py*
 %dir %{_datadir}/system-config-printer/troubleshoot
 %attr(755,root,root) %{_datadir}/system-config-printer/troubleshoot/*.py*
