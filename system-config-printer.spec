@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.2.5
+Version:	1.2.95
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/1.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	71c01b73c458033795b218c4779f9811
+Source0:	http://cyberelk.net/tim/data/system-config-printer/1.3/%{name}-%{version}.tar.bz2
+# Source0-md5:	2fa97e9814b4c555fa8604091d714a79
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -77,8 +77,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
 %{_sysconfdir}/xdg/autostart/*.desktop
-/etc/dbus-1/system.d/newprinternotification.conf
-/etc/dbus-1/system.d/printerdriversinstaller.conf
+/etc/dbus-1/system.d/com.redhat.NewPrinterNotification.conf
+/etc/dbus-1/system.d/com.redhat.PrinterDriversInstaller.conf
 %dir %{_datadir}/system-config-printer
 %dir %{_datadir}/system-config-printer/ui
 %{_datadir}/system-config-printer/ui/*.glade
