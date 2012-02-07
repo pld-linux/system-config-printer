@@ -24,7 +24,8 @@ BuildRequires:	xmlto
 BuildRequires:	xz >= 1:4.999.7
 %pyrequires_eq	python-libs
 Requires:	python-PyXML
-Requires:	python-pycups >= 1.9.28
+Requires:	python-pycups >= 1.9.60
+Requires:	python-pycurl
 Requires:	python-pygtk-glade
 Requires:	python-pynotify
 Requires:	python-smbc
