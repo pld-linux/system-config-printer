@@ -102,27 +102,14 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if 0
 %post udev
-if [ $1 -eq 1 ] ; then
-	# Initial installation
-	/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-fi
+%systemd_post udev-configure-printer.service
 
 %preun udev
-if [ $1 -eq 0 ] ; then
-	# Package removal, not upgrade
-	/bin/systemctl --no-reload disable udev-configure-printer.service >/dev/null 2>&1 || :
-	/bin/systemctl stop udev-configure-printer.service >/dev/null 2>&1 || :
-fi
+%systemd_preun udev-configure-printer.service
 
 %postun udev
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ $1 -ge 1 ] ; then
-	# Package upgrade, not uninstall
-	/bin/systemctl try-restart udev-configure-printer.service >/dev/null 2>&1 || :
-fi
-%endif
+%systemd_reload
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
