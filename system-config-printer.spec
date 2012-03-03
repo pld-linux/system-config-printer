@@ -1,5 +1,3 @@
-# TODO
-# - check(finish) scriptlets for -udev
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
@@ -82,7 +80,8 @@ printers.
 %{__automake}
 %configure \
 	--with-udev-rules
-%{__make}
+%{__make} \
+	udevhelperdir=/lib/udev
 
 %install
 rm -rf $RPM_BUILD_ROOT

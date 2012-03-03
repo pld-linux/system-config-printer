@@ -1,0 +1,11 @@
+--- system-config-printer-1.3.9/udev/udev-configure-printer.service~	2012-03-03 19:25:51.000000000 +0200
++++ system-config-printer-1.3.9/udev/udev-configure-printer.service	2012-03-03 19:28:55.474825835 +0200
+@@ -4,7 +4,7 @@
+ After=cups.socket
+ 
+ [Service]
+-ExecStart=/etc/udev/udev-configure-printer enumerate
++ExecStart=/lib/udev/udev-configure-printer enumerate
+ RemainAfterExit=yes
+ 
+ [Install]
