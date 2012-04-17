@@ -2,7 +2,7 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	1.3.9
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/1.3/%{name}-%{version}.tar.xz
@@ -61,7 +61,9 @@ the configuration tool.
 %package udev
 Summary:	Rules for udev for automatic configuration of USB printers
 Group:		Base
+Requires(post,preun,postun):	systemd-units >= 38
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	systemd-units >= 0.38
 Provides:	hal-cups-utils = 0.6.20
 Obsoletes:	hal-cups-utils < 0.6.20
 
