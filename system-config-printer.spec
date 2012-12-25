@@ -30,6 +30,7 @@ Requires:	python-pycurl
 Requires:	python-pygtk-glade
 Requires:	python-pynotify
 Requires:	python-smbc
+Requires:	%{name}-libs = %{version}-%{release}
 Obsoletes:	eggcups
 Obsoletes:	gnome-cups-manager < 0.34
 # sr@Latn vs. sr@latin
