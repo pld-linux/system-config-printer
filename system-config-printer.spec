@@ -1,14 +1,13 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.3.9
-Release:	5
+Version:	1.4.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/1.3/%{name}-%{version}.tar.xz
-# Source0-md5:	df424f127eede63965608e5ec5e27519
+Source0:	http://cyberelk.net/tim/data/system-config-printer/1.4/%{name}-%{version}.tar.xz
+# Source0-md5:	3267c2eac454f470c0659034196d2668
 Patch0:		pyc.patch
-Patch1:		udev-deprecated.patch
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -20,7 +19,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.21
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xmlto
 BuildRequires:	xz >= 1:4.999.7
@@ -76,7 +75,6 @@ printers.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__intltoolize}
@@ -119,6 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 /etc/xdg/autostart/print-applet.desktop
+%attr(755,root,root) %{_bindir}/install-printerdriver
 %attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
 %dir %{_datadir}/%{name}/ui
@@ -161,12 +160,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/debug.py[co]
 %{_datadir}/%{name}/dnssdresolve.py[co]
 %{_datadir}/%{name}/errordialogs.py[co]
-%{_datadir}/%{name}/firewall.py[co]
+%{_datadir}/%{name}/firewallsettings.py[co]
 %{_datadir}/%{name}/gtkinklevel.py[co]
-%{_datadir}/%{name}/gtk_label_autowrap.py[co]
-%{_datadir}/%{name}/gtkspinner.py[co]
 %{_datadir}/%{name}/gui.py[co]
 %{_datadir}/%{name}/installpackage.py[co]
+%{_datadir}/%{name}/install-printerdriver.py[co]
 %{_datadir}/%{name}/jobviewer.py[co]
 %{_datadir}/%{name}/monitor.py[co]
 %{_datadir}/%{name}/newprinter.py[co]
@@ -199,4 +197,4 @@ rm -rf $RPM_BUILD_ROOT
 /lib/udev/rules.d/*-printers.rules
 %attr(755,root,root) /lib/udev/udev-add-printer
 %attr(755,root,root) /lib/udev/udev-configure-printer
-%{systemdunitdir}/udev-configure-printer.service
+%{systemdunitdir}/configure-printer@.service
