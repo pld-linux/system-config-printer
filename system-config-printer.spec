@@ -1,35 +1,42 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.4.1
+Version:	1.5.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/1.4/%{name}-%{version}.tar.xz
-# Source0-md5:	3d794eb88c5813c3024b181677a602dd
-Patch0:		pyc.patch
+Source0:	http://cyberelk.net/tim/data/system-config-printer/1.5/%{name}-%{version}.tar.xz
+# Source0-md5:	dd5b4c6b8c47e2bd780960b38a8e9a77
+Patch0:		%{name}-exec.patch
 URL:		http://cyberelk.net/tim/software/system-config-printer/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	cups-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-tools
+BuildRequires:	glib2-devel
 BuildRequires:	intltool
+BuildRequires:	libusb-devel
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel
-BuildRequires:	python-modules
+BuildRequires:	python3-devel
+BuildRequires:	python3-modules
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.21
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	udev-devel >= 172
 BuildRequires:	xmlto
 BuildRequires:	xz >= 1:4.999.7
-%pyrequires_eq	python-libs
-Requires:	python-PyXML
-Requires:	python-pycurl
-Requires:	python-pygtk-glade
-Requires:	python-pynotify
-Requires:	python-smbc
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	glib2
+Requires:	gtk+3
+Requires:	libnotify
+Requires:	pango
+Requires:	python3-dbus
+Requires:	python3-modules
+Requires:	python3-pycups >= 1.9.60
+Requires:	python3-pycurl
+Requires:	python3-pygobject3
 Obsoletes:	eggcups
 Obsoletes:	gnome-cups-manager < 0.34
 # sr@Latn vs. sr@latin
@@ -52,7 +59,7 @@ CUPS-a.
 Summary:	Libraries and shared code for printer administration tool
 Group:		Base
 Requires:	python
-Requires:	python-pycups >= 1.9.60
+Requires:	python3-pycups >= 1.9.60
 Conflicts:	%{name} < 1.3.9
 
 %description libs
@@ -95,11 +102,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %find_lang %{name}
 
-%py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
-%py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
-%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
-%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
-%py_postclean %{_datadir}/%{name}
+%py3_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
+%py3_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
+%py3_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
+%py3_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -120,21 +126,25 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/install-printerdriver
 %attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
+%{_datadir}/appdata/system-config-printer.appdata.xml
 %dir %{_datadir}/%{name}/ui
 %{_datadir}/%{name}/ui/*.ui
 %dir %{_datadir}/%{name}/troubleshoot
-%{_datadir}/%{name}/troubleshoot/*.py[co]
+%{_datadir}/%{name}/troubleshoot/__pycache__
+%{_datadir}/%{name}/troubleshoot/*.py
 %dir %{_datadir}/%{name}/xml
+%{_datadir}/%{name}/xml/__pycache__
 %{_datadir}/%{name}/xml/*.rng
-%{_datadir}/%{name}/xml/validate.py[co]
-%{_datadir}/%{name}/check-device-ids.py[co]
-%{_datadir}/%{name}/HIG.py[co]
-%{_datadir}/%{name}/SearchCriterion.py[co]
-%{_datadir}/%{name}/serversettings.py[co]
-%{_datadir}/%{name}/system-config-printer.py[co]
-%{_datadir}/%{name}/ToolbarSearchEntry.py[co]
-%{_datadir}/%{name}/userdefault.py[co]
-%{_datadir}/%{name}/applet.py[co]
+%{_datadir}/%{name}/xml/validate.py
+%{_datadir}/%{name}/check-device-ids.py
+%{_datadir}/%{name}/HIG.py
+%{_datadir}/%{name}/OpenPrintingRequest.py
+%{_datadir}/%{name}/SearchCriterion.py
+%{_datadir}/%{name}/serversettings.py
+%{_datadir}/%{name}/system-config-printer.py
+%{_datadir}/%{name}/ToolbarSearchEntry.py
+%{_datadir}/%{name}/userdefault.py
+%{_datadir}/%{name}/applet.py
 %dir %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/icons/i-network-printer.png
 %{_mandir}/man1/system-config-printer-applet.1*
@@ -151,46 +161,48 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.fedoraproject.Config.Printing.service
 %attr(755,root,root) %{_bindir}/scp-dbus-service
 %dir %{_datadir}/%{name}
-%{_datadir}/%{name}/asyncconn.py[co]
-%{_datadir}/%{name}/asyncipp.py[co]
-%{_datadir}/%{name}/asyncpk1.py[co]
-%{_datadir}/%{name}/authconn.py[co]
-%{_datadir}/%{name}/config.py[co]
-%{_datadir}/%{name}/cupspk.py[co]
-%{_datadir}/%{name}/debug.py[co]
-%{_datadir}/%{name}/dnssdresolve.py[co]
-%{_datadir}/%{name}/errordialogs.py[co]
-%{_datadir}/%{name}/firewallsettings.py[co]
-%{_datadir}/%{name}/gtkinklevel.py[co]
-%{_datadir}/%{name}/gui.py[co]
-%{_datadir}/%{name}/installpackage.py[co]
-%{_datadir}/%{name}/install-printerdriver.py[co]
-%{_datadir}/%{name}/jobviewer.py[co]
-%{_datadir}/%{name}/monitor.py[co]
-%{_datadir}/%{name}/newprinter.py[co]
-%{_datadir}/%{name}/options.py[co]
-%{_datadir}/%{name}/optionwidgets.py[co]
-%{_datadir}/%{name}/PhysicalDevice.py[co]
-%{_datadir}/%{name}/ppdcache.py[co]
-%{_datadir}/%{name}/ppdippstr.py[co]
-%{_datadir}/%{name}/ppdsloader.py[co]
-%{_datadir}/%{name}/printerproperties.py[co]
-%{_datadir}/%{name}/probe_printer.py[co]
-%{_datadir}/%{name}/pysmb.py[co]
-%{_datadir}/%{name}/scp-dbus-service.py[co]
-%{_datadir}/%{name}/smburi.py[co]
-%{_datadir}/%{name}/statereason.py[co]
-%{_datadir}/%{name}/timedops.py[co]
+%{_datadir}/%{name}/__pycache__
+%{_datadir}/%{name}/asyncconn.py
+%{_datadir}/%{name}/asyncipp.py
+%{_datadir}/%{name}/asyncpk1.py
+%{_datadir}/%{name}/authconn.py
+%{_datadir}/%{name}/config.py
+%{_datadir}/%{name}/cupspk.py
+%{_datadir}/%{name}/debug.py
+%{_datadir}/%{name}/dnssdresolve.py
+%{_datadir}/%{name}/errordialogs.py
+%{_datadir}/%{name}/firewallsettings.py
+%{_datadir}/%{name}/gtkinklevel.py
+%{_datadir}/%{name}/gui.py
+%{_datadir}/%{name}/installpackage.py
+%{_datadir}/%{name}/install-printerdriver.py
+%{_datadir}/%{name}/jobviewer.py
+%{_datadir}/%{name}/monitor.py
+%{_datadir}/%{name}/newprinter.py
+%{_datadir}/%{name}/options.py
+%{_datadir}/%{name}/optionwidgets.py
+%{_datadir}/%{name}/PhysicalDevice.py
+%{_datadir}/%{name}/ppdcache.py
+%{_datadir}/%{name}/ppdippstr.py
+%{_datadir}/%{name}/ppdsloader.py
+%{_datadir}/%{name}/printerproperties.py
+%{_datadir}/%{name}/probe_printer.py
+%{_datadir}/%{name}/pysmb.py
+%{_datadir}/%{name}/scp-dbus-service.py
+%{_datadir}/%{name}/smburi.py
+%{_datadir}/%{name}/statereason.py
+%{_datadir}/%{name}/timedops.py
 
-%dir %{py_sitescriptdir}/cupshelpers
-%{py_sitescriptdir}/cupshelpers/__init__.py[co]
-%{py_sitescriptdir}/cupshelpers/config.py[co]
-%{py_sitescriptdir}/cupshelpers/cupshelpers.py[co]
-%{py_sitescriptdir}/cupshelpers/installdriver.py[co]
-%{py_sitescriptdir}/cupshelpers/openprinting.py[co]
-%{py_sitescriptdir}/cupshelpers/ppds.py[co]
-%{py_sitescriptdir}/cupshelpers/xmldriverprefs.py[co]
-%{py_sitescriptdir}/*.egg-info
+%dir %{py3_sitescriptdir}/cupshelpers
+%{py3_sitescriptdir}/cupshelpers/__pycache__
+%{py3_sitescriptdir}/cupshelpers/__init__.py
+%{py3_sitescriptdir}/cupshelpers/config.py
+%{py3_sitescriptdir}/cupshelpers/cupshelpers.py
+%{py3_sitescriptdir}/cupshelpers/installdriver.py
+%{py3_sitescriptdir}/cupshelpers/openprinting.py
+%{py3_sitescriptdir}/cupshelpers/ppds.py
+%{py3_sitescriptdir}/cupshelpers/xmldriverprefs.py
+%{py3_sitescriptdir}/*.egg-info
 
 %files udev
 %defattr(644,root,root,755)

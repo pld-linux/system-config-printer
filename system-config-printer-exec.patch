@@ -1,0 +1,21 @@
+--- system-config-printer-1.5.4/dbus/scp-dbus-service.in.exec	2015-01-24 22:37:48.993118117 +0100
++++ system-config-printer-1.5.4/dbus/scp-dbus-service.in	2015-01-24 22:37:55.429749913 +0100
+@@ -1,3 +1,3 @@
+ #!/bin/sh
+ prefix=@prefix@
+-exec @datarootdir@/@PACKAGE@/scp-dbus-service.py "$@"
++exec python3 @datarootdir@/@PACKAGE@/scp-dbus-service.py "$@"
+--- system-config-printer-1.5.4/system-config-printer-applet.in.exec	2015-01-24 22:36:36.643510079 +0100
++++ system-config-printer-1.5.4/system-config-printer-applet.in	2015-01-24 22:38:15.509641128 +0100
+@@ -1,3 +1,3 @@
+ #!/bin/sh
+ prefix=@prefix@
+-exec @datarootdir@/@PACKAGE@/applet.py "$@"
++exec python3 @datarootdir@/@PACKAGE@/applet.py "$@"
+--- system-config-printer-1.5.4/system-config-printer.in.exec	2015-01-24 22:36:27.330227202 +0100
++++ system-config-printer-1.5.4/system-config-printer.in	2015-01-24 22:38:08.196347415 +0100
+@@ -1,3 +1,3 @@
+ #!/bin/sh
+ prefix=@prefix@
+-exec @datarootdir@/@PACKAGE@/system-config-printer.py "$@"
++exec python3 @datarootdir@/@PACKAGE@/system-config-printer.py "$@"
