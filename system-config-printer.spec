@@ -2,7 +2,7 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	1.5.4
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://cyberelk.net/tim/data/system-config-printer/1.5/%{name}-%{version}.tar.xz
@@ -104,8 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %py3_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py3_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
-%py3_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
-%py3_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/cupshelpers
+%py3_comp $RPM_BUILD_ROOT%{py_sitedir}/cupshelpers
+%py3_ocomp $RPM_BUILD_ROOT%{py_sitedir}/cupshelpers
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -193,16 +193,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/statereason.py
 %{_datadir}/%{name}/timedops.py
 
-%dir %{py3_sitescriptdir}/cupshelpers
-%{py3_sitescriptdir}/cupshelpers/__pycache__
-%{py3_sitescriptdir}/cupshelpers/__init__.py
-%{py3_sitescriptdir}/cupshelpers/config.py
-%{py3_sitescriptdir}/cupshelpers/cupshelpers.py
-%{py3_sitescriptdir}/cupshelpers/installdriver.py
-%{py3_sitescriptdir}/cupshelpers/openprinting.py
-%{py3_sitescriptdir}/cupshelpers/ppds.py
-%{py3_sitescriptdir}/cupshelpers/xmldriverprefs.py
-%{py3_sitescriptdir}/*.egg-info
+%dir %{py3_sitedir}/cupshelpers
+%{py3_sitedir}/cupshelpers/__pycache__
+%{py3_sitedir}/cupshelpers/__init__.py
+%{py3_sitedir}/cupshelpers/config.py
+%{py3_sitedir}/cupshelpers/cupshelpers.py
+%{py3_sitedir}/cupshelpers/installdriver.py
+%{py3_sitedir}/cupshelpers/openprinting.py
+%{py3_sitedir}/cupshelpers/ppds.py
+%{py3_sitedir}/cupshelpers/xmldriverprefs.py
+%{py3_sitedir}/*.egg-info
 
 %files udev
 %defattr(644,root,root,755)
