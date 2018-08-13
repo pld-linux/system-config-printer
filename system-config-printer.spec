@@ -1,14 +1,14 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.5.4
-Release:	5
+Version:	1.5.11
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://cyberelk.net/tim/data/system-config-printer/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	dd5b4c6b8c47e2bd780960b38a8e9a77
+Source0:	https://github.com/zdohnal/system-config-printer/releases/download/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	26baa05dfb5fc40bcc11d385fb48bb23
 Patch0:		%{name}-exec.patch
-URL:		http://cyberelk.net/tim/software/system-config-printer/
+URL:		https://github.com/zdohnal/system-config-printer
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	cups-devel
@@ -121,12 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog NEWS
 /etc/xdg/autostart/print-applet.desktop
 %attr(755,root,root) %{_bindir}/install-printerdriver
 %attr(755,root,root) %{_bindir}/system-config-printer
 %attr(755,root,root) %{_bindir}/system-config-printer-applet
-%{_datadir}/appdata/system-config-printer.appdata.xml
+%{_datadir}/metainfo/system-config-printer.appdata.xml
 %dir %{_datadir}/%{name}/ui
 %{_datadir}/%{name}/ui/*.ui
 %dir %{_datadir}/%{name}/troubleshoot
@@ -138,6 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/xml/validate.py
 %{_datadir}/%{name}/check-device-ids.py
 %{_datadir}/%{name}/HIG.py
+%{_datadir}/%{name}/killtimer.py
 %{_datadir}/%{name}/OpenPrintingRequest.py
 %{_datadir}/%{name}/SearchCriterion.py
 %{_datadir}/%{name}/serversettings.py
