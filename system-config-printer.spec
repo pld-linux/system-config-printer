@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.5.13
+Version:	1.5.14
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://github.com/OpenPrinting/system-config-printer/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	e92b213b474e9394bda2531812d651fe
+# Source0-md5:	eb59fc79921e4378cf35650ad91c7476
 Patch0:		%{name}-exec.patch
 URL:		https://github.com/OpenPrinting/system-config-printer
 BuildRequires:	autoconf
