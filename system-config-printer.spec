@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.5.14
+Version:	1.5.15
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://github.com/OpenPrinting/system-config-printer/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	eb59fc79921e4378cf35650ad91c7476
+# Source0-md5:	c03bc00291eb5329e55d10d73cbe7a1c
 Patch0:		%{name}-exec.patch
 URL:		https://github.com/OpenPrinting/system-config-printer
 BuildRequires:	autoconf
@@ -14,7 +14,7 @@ BuildRequires:	automake
 BuildRequires:	cups-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.18.3
 BuildRequires:	glib2-devel
 BuildRequires:	intltool
 BuildRequires:	libusb-devel
