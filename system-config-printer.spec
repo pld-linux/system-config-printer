@@ -22,7 +22,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python3-devel
 BuildRequires:	python3-modules
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.21
+BuildRequires:	rpmbuild(macros) >= 1.750
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel >= 172
 BuildRequires:	xmlto
@@ -93,6 +93,8 @@ printers.
 %{__make} \
 	udevhelperdir=/lib/udev
 
+%py3_build
+
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
@@ -100,12 +102,16 @@ rm -rf $RPM_BUILD_ROOT
 	udevrulesdir=/lib/udev/rules.d \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{_ver_ge "%py3_ver" "3.10"}
+%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/lib/python%{py3_ver}
+%endif
+
+%py3_install
+
 %find_lang %{name}
 
 %py3_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py3_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
-%py3_comp $RPM_BUILD_ROOT%{py_sitedir}/cupshelpers
-%py3_ocomp $RPM_BUILD_ROOT%{py_sitedir}/cupshelpers
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -194,16 +200,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/statereason.py
 %{_datadir}/%{name}/timedops.py
 
-%dir %{py3_sitedir}/cupshelpers
-%{py3_sitedir}/cupshelpers/__pycache__
-%{py3_sitedir}/cupshelpers/__init__.py
-%{py3_sitedir}/cupshelpers/config.py
-%{py3_sitedir}/cupshelpers/cupshelpers.py
-%{py3_sitedir}/cupshelpers/installdriver.py
-%{py3_sitedir}/cupshelpers/openprinting.py
-%{py3_sitedir}/cupshelpers/ppds.py
-%{py3_sitedir}/cupshelpers/xmldriverprefs.py
-%{py3_sitedir}/*.egg-info
+%dir %{py3_sitescriptdir}/cupshelpers
+%{py3_sitescriptdir}/cupshelpers/__pycache__
+%{py3_sitescriptdir}/cupshelpers/__init__.py
+%{py3_sitescriptdir}/cupshelpers/config.py
+%{py3_sitescriptdir}/cupshelpers/cupshelpers.py
+%{py3_sitescriptdir}/cupshelpers/installdriver.py
+%{py3_sitescriptdir}/cupshelpers/openprinting.py
+%{py3_sitescriptdir}/cupshelpers/ppds.py
+%{py3_sitescriptdir}/cupshelpers/xmldriverprefs.py
+%{py3_sitescriptdir}/*.egg-info
 
 %files udev
 %defattr(644,root,root,755)
