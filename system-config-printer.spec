@@ -1,12 +1,12 @@
 Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
-Version:	1.5.16
-Release:	3
+Version:	1.5.18
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://github.com/OpenPrinting/system-config-printer/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	c06c4befbed1f4635028dbcf6e50a9fa
+# Source0-md5:	ee92ed28a0f89a88ff0478c62c59c599
 Patch0:		%{name}-exec.patch
 URL:		https://github.com/OpenPrinting/system-config-printer
 BuildRequires:	autoconf
@@ -89,8 +89,10 @@ printers.
 %{__autoconf}
 %{__automake}
 %configure \
+	--with-cups-serverbin-dir="$(cups-config --serverbin)" \
 	--with-udev-rules
 %{__make} \
+	PYTHON=/bin/true \
 	udevhelperdir=/lib/udev
 
 %py3_build
@@ -98,13 +100,10 @@ printers.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	PYTHON=/bin/true \
 	udevhelperdir=/lib/udev \
-	udevrulesdir=/lib/udev/rules.d \
-	DESTDIR=$RPM_BUILD_ROOT
-
-%if %{_ver_ge "%py3_ver" "3.10"}
-%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/lib/python%{py3_ver}
-%endif
+	udevrulesdir=/lib/udev/rules.d
 
 %py3_install
 
