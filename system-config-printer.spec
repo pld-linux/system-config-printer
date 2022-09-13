@@ -2,7 +2,7 @@ Summary:	A graphical interface for configuring printers
 Summary(pl.UTF-8):	Graficzny interfejs do zarządzania drukarkami
 Name:		system-config-printer
 Version:	1.5.18
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://github.com/OpenPrinting/system-config-printer/releases/download/v%{version}/%{name}-%{version}.tar.xz
@@ -58,7 +58,7 @@ CUPS-a.
 %package libs
 Summary:	Libraries and shared code for printer administration tool
 Group:		Base
-Requires:	python
+Requires:	python3
 Requires:	python3-pycups >= 1.9.60
 Conflicts:	%{name} < 1.3.9
 
