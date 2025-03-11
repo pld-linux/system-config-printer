@@ -81,7 +81,7 @@ printers.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P 0 -p1
 
 %build
 %{__gettextize}
