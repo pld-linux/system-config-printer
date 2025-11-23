@@ -9,18 +9,18 @@ Source0:	https://github.com/OpenPrinting/system-config-printer/releases/download
 # Source0-md5:	ee92ed28a0f89a88ff0478c62c59c599
 Patch0:		%{name}-exec.patch
 URL:		https://github.com/OpenPrinting/system-config-printer
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	autoconf-archive
-BuildRequires:	automake
+BuildRequires:	automake >= 1.6
 BuildRequires:	cups-devel
 BuildRequires:	desktop-file-utils
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-tools >= 0.20
-BuildRequires:	glib2-devel
-BuildRequires:	libusb-devel
+BuildRequires:	glib2-devel >= 2.0
+BuildRequires:	libusb-devel >= 1.0
 BuildRequires:	pkgconfig
-BuildRequires:	python3-devel
-BuildRequires:	python3-modules
+BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.750
 BuildRequires:	tar >= 1:1.22
@@ -28,19 +28,17 @@ BuildRequires:	udev-devel >= 172
 BuildRequires:	xmlto
 BuildRequires:	xz >= 1:4.999.7
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2
-Requires:	gtk+3
+Requires:	glib2 >= 2.0
+Requires:	gtk+3 >= 3.0
 Requires:	libnotify
 Requires:	pango
 Requires:	python3-dbus
 Requires:	python3-modules
 Requires:	python3-pycups >= 1.9.60
 Requires:	python3-pycurl
-Requires:	python3-pygobject3
-Obsoletes:	eggcups
+Requires:	python3-pygobject3 >= 3.0
+Obsoletes:	eggcups < 0.21
 Obsoletes:	gnome-cups-manager < 0.34
-# sr@Latn vs. sr@latin
-Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -57,6 +55,7 @@ CUPS-a.
 
 %package libs
 Summary:	Libraries and shared code for printer administration tool
+Summary(pl.UTF-8):	Biblioteki i kod współdzielony dla narzędzi do administrowania drukarkami
 Group:		Base
 Requires:	python3
 Requires:	python3-pycups >= 1.9.60
@@ -66,8 +65,13 @@ Conflicts:	%{name} < 1.3.9
 The common code used by both the graphical and non-graphical parts of
 the configuration tool.
 
+%description libs -l pl.UTF-8
+Kod wspólny używany przez graficzne i niegraficzne części narzędzia
+konfiguracyjnego.
+
 %package udev
 Summary:	Rules for udev for automatic configuration of USB printers
+Summary(pl.UTF-8):	Reguły udev do automatycznej konfiguracji drukarek USB
 Group:		Base
 Requires(post,preun,postun):	systemd-units >= 38
 Requires:	%{name}-libs = %{version}-%{release}
@@ -79,18 +83,23 @@ Obsoletes:	hal-cups-utils < 0.6.20
 The udev rules and helper programs for automatically configuring USB
 printers.
 
+%description udev -l pl.UTF-8
+Reguły udev oraz programy pomocniczne do automatycznego konfigurowania
+drukarek USB.
+
 %prep
 %setup -q
 %patch -P 0 -p1
 
 %build
 %{__gettextize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure \
 	--with-cups-serverbin-dir="$(cups-config --serverbin)" \
 	--with-udev-rules
+
 %{__make} \
 	PYTHON=/bin/true \
 	udevhelperdir=/lib/udev
@@ -99,6 +108,7 @@ printers.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PYTHON=/bin/true \
@@ -107,10 +117,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %py3_install
 
-%find_lang %{name}
-
 %py3_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py3_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -155,7 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/icons/i-network-printer.png
 %{_mandir}/man1/system-config-printer-applet.1*
 %{_mandir}/man1/system-config-printer.1*
-%{_desktopdir}/*.desktop
+%{_desktopdir}/system-config-printer.desktop
 
 %files libs
 %defattr(644,root,root,755)
@@ -199,16 +209,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/statereason.py
 %{_datadir}/%{name}/timedops.py
 
-%dir %{py3_sitescriptdir}/cupshelpers
-%{py3_sitescriptdir}/cupshelpers/__pycache__
-%{py3_sitescriptdir}/cupshelpers/__init__.py
-%{py3_sitescriptdir}/cupshelpers/config.py
-%{py3_sitescriptdir}/cupshelpers/cupshelpers.py
-%{py3_sitescriptdir}/cupshelpers/installdriver.py
-%{py3_sitescriptdir}/cupshelpers/openprinting.py
-%{py3_sitescriptdir}/cupshelpers/ppds.py
-%{py3_sitescriptdir}/cupshelpers/xmldriverprefs.py
-%{py3_sitescriptdir}/*.egg-info
+%{py3_sitescriptdir}/cupshelpers
+%{py3_sitescriptdir}/cupshelpers-1.0-py*.egg-info
 
 %files udev
 %defattr(644,root,root,755)
